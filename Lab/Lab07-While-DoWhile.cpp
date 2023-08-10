@@ -50,10 +50,46 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 int main() {
 
-    //--| YOUR CODE HERE
-
+    srand( time( NULL ) );
+    int p = 100,num,play,min = 1,max = 100;
+   
+    do{
+        int rd = rand() % 100 + 1 ;
+        printf("\nDo you want to play game (1=play,-1=exit)\n");
+        scanf("%d",&play);
+        if (play == 1 ){
+            printf("1\n(Score = %d)\n",p);
+            printf("Guess the winning number (1-100) :");\
+            while (num != rd){
+                scanf("%d", &num);
+                if (num == rd){
+                    printf("That is correct! The winning number is %d.\n", num);
+                    printf("Score this game: %d",p);
+                }
+                else if (p == 0){
+                    printf("Exit game");
+                }
+                else {
+                    if (num < rd && p > 0){
+                        p = p - 10 ;
+                        printf("Sorry, the winning number is Higher than %d. (Score = %d)\n",num,p);
+                        min = num + 1 ; 
+                        printf("Guess the winning number (%d-%d) :",min,max);
+                    }
+                    else{
+                        p = p - 10 ;
+                        printf("Sorry, the winning number is Lower than %d. (Score = %d)\n",num,p);
+                        max = num - 1 ;
+                        printf("Guess the winning number (%d-%d) :",min,max);
+                    }   
+                }   
+            }   
+        } else if( play == -1 ) break ;
+    } while (true);
     return 0 ;
 }//end main function
